@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React from 'react';
 import Table from 'react-bootstrap/Table';
-import Image from 'react-bootstrap/Image';
+// import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
+// import Button from 'react-bootstrap/Button';
 
 
 class App extends React.Component {
