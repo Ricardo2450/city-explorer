@@ -1,12 +1,17 @@
 import axios from 'axios';
 import React from 'react';
+import Table from 'react-bootstrap/Table';
+
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       city: '',
-      cityData: {},
+      lat: '',
+      lon: '',
+      name: '',
+      showCityData: false,
       isError: false,
       errorMessage: ''
     }
@@ -18,7 +23,7 @@ class App extends React.Component {
 // get the data from the API
 
 
-// 1.async
+// 1. async
 // 2. await
 // 3. .data
 
@@ -54,9 +59,14 @@ let locationInfo = await axios.get(`https://us1.locationiq.com/v1/search?key=${p
 console.log(locationInfo.data[0]);
 // put the data from the API into state
 this.setState({
-  cityData: locationInfo.data[0]
+  lon: locationInfo.data[0].lon,
+  lat: locationInfo.data[0].lat,
+  name: locationInfo.data[0].display_name,
+  showCityData: true,
 });
 }
+
+
 
 handleCityInput = (e) => {
   this.setState({
@@ -68,7 +78,14 @@ handleCityInput = (e) => {
 
 render() {
   // location for maps code
-// let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=47.6038321,-122.330062&zoom=14`
+
+  // let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${cityData.lat},${cityData.lon}&zoom=12`
+
+// let locationTag = this.state.cityData.map((place, lat, lon,idx) => {
+//   return <li key={idx}>{place.name}, {lat.lat}, {lon.lon}</li>
+// });
+
+// console.log(mapURL);
 
 
   return (
@@ -78,8 +95,33 @@ render() {
         <label>Search for a City
           <input type='text' name='city' onChange={this.handleCityInput}/>
         </label>
-        <button type='submit'>Search for a City</button>
+        <button type='submit'>Explore!</button>
       </form>
+      { this.state.showCityData &&
+      <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>location</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{this.state.name}</td>
+          <td>{this.state.lat}</td>
+          <td>{this.state.lon}</td>
+        </tr>
+        </tbody>
+      </Table>
+      }
+      {/* { this.state.showCityData &&
+      <ul>
+        <li>{this.state.name}</li>
+        <li>{this.state.lon}</li>
+        <li>{this.state.lat}</li>
+      </ul>
+      } */}
     </>
   )
 }
