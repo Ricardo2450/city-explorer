@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import Table from 'react-bootstrap/Table';
 // import Image from 'react-bootstrap/Image';
-// import Alert from 'react-bootstrap/Alert';
+import Alert from 'react-bootstrap/Alert';
 // import Button from 'react-bootstrap/Button';
 
 
@@ -67,11 +67,12 @@ class App extends React.Component {
         lat: locationInfo.data[0].lat,
         name: locationInfo.data[0].display_name,
         showCityData: true,
-        isError: false
+        isError: false,
+        isAlertShown: false,
       });
     } catch (error) {
-      console.log('error: ', error);
-          console.log('error.message: ', error.message);
+      // console.log('error: ', error);
+      //     console.log('error.message: ', error.message);
           this.setState({
             errorMessage : error.message,
             isError: true
@@ -108,7 +109,7 @@ class App extends React.Component {
     // location for maps code
 
 
-    // let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.props.display.lat},${this.props.display.lon}&zoom=12`
+    let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.lat},${this.state.lon}&zoom=12`
 
 
     // console.log(mapURL);
@@ -123,9 +124,7 @@ class App extends React.Component {
           </label>
           <button type='submit'>Explore!</button>
         </form>
-        {/* {
-          this.state.isError ? <p>{this.state.errorMessage}</p>
-        } */}
+        {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Error!</Alert.Heading><p>{this.state.errorMessage}</p></Alert> : <p className='alert'></p>}
         {this.state.showCityData &&
           <Table striped bordered hover>
             <thead>
@@ -144,7 +143,7 @@ class App extends React.Component {
             </tbody>
           </Table>
         }
-        {/* <img source={mapURL} alt='City Map' fluid /> */}
+        <img src={mapURL} alt='City Map' fluid />
 
       </>
     )
