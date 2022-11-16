@@ -80,6 +80,18 @@ class App extends React.Component {
     }
 }
 
+handleWeather = async (e) => {
+  e.preventDefault();
+  let url = `render url goes here`
+  // `${process.env.REACT_APP_SERVER}/`
+  let locationData = await axios.get(url);
+  // console.log()
+
+}
+
+
+
+
 
 
   handleCityInput = (e) => {
@@ -143,7 +155,20 @@ class App extends React.Component {
             </tbody>
           </Table>
         }
-        <img src={mapURL} alt='City Map' fluid />
+
+
+        <div id='mapURL'>
+        <img src={mapURL} alt='City Map' title='map on error or blank' />
+        </div> :
+        <div id='mapURL'>
+        <img src={mapURL} alt={this.props.name} title={this.props.name} />
+        </div>
+
+
+
+{/* 
+        {this.state.mapURL ? <img src={mapURL} alt='City Map' fluid /> : <p className='alert'></p>}
+        <img src={mapURL} alt='City Map' fluid /> */}
 
       </>
     )
