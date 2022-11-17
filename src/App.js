@@ -16,7 +16,8 @@ class App extends React.Component {
       name: '',
       showCityData: false,
       isError: false,
-      errorMessage: ''
+      errorMessage: '',
+      weatherData: [],
     }
   }
 
@@ -85,10 +86,10 @@ class App extends React.Component {
 
   
   
-  handleWeatherRequest = async (e) => {
-    e.preventDefault();
+  handleWeatherRequest = async () => {
+    // e.preventDefault();
     try {
-      let weatherUrl = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.selectedCity}`);
+      let weatherUrl = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.city}`);
       // `${process.env.REACT_APP_SERVER}/`
       console.log(weatherUrl);
 
@@ -184,6 +185,17 @@ class App extends React.Component {
         <div id='mapURL'>
           <img src={mapURL} alt={this.props.name} title={this.props.name} />
         </div>
+        
+        {
+          
+          this.state.weatherData.length &&
+          this.state.weatherData.map(forcast => (
+            <>
+            {/* <p>Three day forcast</p> */}
+            <p>{forcast.date} will be {forcast.description}</p>
+            </>
+          ))
+        }
 
 
 
