@@ -70,24 +70,45 @@ class App extends React.Component {
         isError: false,
         isAlertShown: false,
       });
+
+      this.handleWeatherRequest();
+
     } catch (error) {
       // console.log('error: ', error);
       //     console.log('error.message: ', error.message);
-          this.setState({
-            errorMessage : error.message,
-            isError: true
-          })
+      this.setState({
+        errorMessage: error.message,
+        isError: true
+      })
     }
-}
+  }
 
-handleWeather = async (e) => {
-  e.preventDefault();
-  let url = `render url goes here`
-  // `${process.env.REACT_APP_SERVER}/`
-  let locationData = await axios.get(url);
-  // console.log()
+  
+  
+  handleWeatherRequest = async (e) => {
+    e.preventDefault();
+    try {
+      let weatherUrl = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.selectedCity}`);
+      // `${process.env.REACT_APP_SERVER}/`
+      console.log(weatherUrl);
 
-}
+      this.setState({
+        weatherData: weatherUrl.data,
+        isError: false,
+        isWeather: true
+      });
+    } catch (error) {
+      console.log('error: ', error)
+      console.log('error.message: ', error.message);
+      this.setState({
+        errorMessage: error.message,
+        isError: true,
+        isWeather: false
+      });
+      // let locationData = await axios.get(Url);
+      // console.log(locationData);
+    }
+  }
 
 
 
@@ -100,28 +121,28 @@ handleWeather = async (e) => {
     });
   };
 
-// handleAlert = () => {
-// const [show, setShow] = useState(true);
+  // handleAlert = () => {
+  // const [show, setShow] = useState(true);
 
-//   if (show) {
-//     return (
-//       <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-//         <Alert.Heading>You got an error!</Alert.Heading>
-//         <p>
-//         {this.state.errorMessage}
-//         </p>
-//       </Alert>
-//     );
-//   }
-//   return <Button onClick={() => setShow(true)}>Show Alert</Button>;
-// }
+  //   if (show) {
+  //     return (
+  //       <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+  //         <Alert.Heading>You got an error!</Alert.Heading>
+  //         <p>
+  //         {this.state.errorMessage}
+  //         </p>
+  //       </Alert>
+  //     );
+  //   }
+  //   return <Button onClick={() => setShow(true)}>Show Alert</Button>;
+  // }
 
 
   render() {
     // location for maps code
 
 
-    let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.lat},${this.state.lon}&zoom=12`
+    let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.lat},${this.state.lon}&zoom=14`
 
 
     // console.log(mapURL);
@@ -134,7 +155,7 @@ handleWeather = async (e) => {
           <label>Search for a City
             <input type='text' name='city' onChange={this.handleCityInput} />
           </label>
-          <button type='submit'>Explore!</button>
+          <button variant='primary' type='submit'>Explore!</button>
         </form>
         {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Error!</Alert.Heading><p>{this.state.errorMessage}</p></Alert> : <p className='alert'></p>}
         {this.state.showCityData &&
@@ -157,16 +178,16 @@ handleWeather = async (e) => {
         }
 
 
-        <div id='mapURL'>
+        {/* <div id='mapURL'>
         <img src={mapURL} alt='City Map' title='map on error or blank' />
-        </div> :
+        </div> : */}
         <div id='mapURL'>
-        <img src={mapURL} alt={this.props.name} title={this.props.name} />
+          <img src={mapURL} alt={this.props.name} title={this.props.name} />
         </div>
 
 
 
-{/* 
+        {/* 
         {this.state.mapURL ? <img src={mapURL} alt='City Map' fluid /> : <p className='alert'></p>}
         <img src={mapURL} alt='City Map' fluid /> */}
 
