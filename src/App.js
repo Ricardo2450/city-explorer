@@ -187,11 +187,11 @@ class App extends React.Component {
         </div>
         
         {
+        // <p>Three day forcast</p>
           
           this.state.weatherData.length &&
           this.state.weatherData.map(forcast => (
             <>
-            {/* <p>Three day forcast</p> */}
             <p>{forcast.date} will be {forcast.description}</p>
             </>
           ))
