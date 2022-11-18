@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React from 'react';
+import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 // import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
@@ -18,6 +18,7 @@ class App extends React.Component {
       isError: false,
       errorMessage: '',
       weatherData: [],
+      movieData: [],
     }
   }
 
@@ -72,7 +73,12 @@ class App extends React.Component {
         isAlertShown: false,
       });
 
-      this.handleWeatherRequest();
+      this.handleWeatherRequest(
+        locationInfo.data[0].lat,
+        locationInfo.data[0].lon
+      );
+
+      this.handleMovieRequest();
 
     } catch (error) {
       // console.log('error: ', error);
@@ -84,12 +90,15 @@ class App extends React.Component {
     }
   }
 
-  
-  
-  handleWeatherRequest = async () => {
+
+
+  handleWeatherRequest = async (lat, lon) => {
     // e.preventDefault();
+    // console.log(lat);
+    // console.log(lon);
     try {
-      let weatherUrl = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city_name=${this.state.city}`);
+      console.log(`${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`);
+      let weatherUrl = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`);
       // `${process.env.REACT_APP_SERVER}/`
       console.log(weatherUrl);
 
@@ -106,12 +115,34 @@ class App extends React.Component {
         isError: true,
         isWeather: false
       });
-      // let locationData = await axios.get(Url);
-      // console.log(locationData);
     }
   }
 
 
+  handleMovieRequest = async () => {
+    // e.preventDefault();
+    // console.log(searchedCity);
+    try {
+      console.log(`${process.env.REACT_APP_SERVER}/movie?name=${this.state.city}`);
+      let movieUrl = await axios.get(`${process.env.REACT_APP_SERVER}/movie?name=${this.state.city}`);
+      // `${process.env.REACT_APP_SERVER}/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchedCity}`
+      console.log(movieUrl.data);      
+
+      this.setState({
+        movieData: movieUrl.data,
+        isError: false,
+        isMovie: true,
+      });
+    } catch (error) {
+      console.log('error: ', error)
+      console.log('error.message: ', error.message);
+      this.setState({
+        errorMessage: error.message,
+        isError: true,
+        isMovie: false
+      });
+    }
+  }
 
 
 
@@ -160,6 +191,7 @@ class App extends React.Component {
         </form>
         {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Error!</Alert.Heading><p>{this.state.errorMessage}</p></Alert> : <p className='alert'></p>}
         {this.state.showCityData &&
+        <>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -176,25 +208,39 @@ class App extends React.Component {
               </tr>
             </tbody>
           </Table>
+            <div id='mapURL'>
+              <img src={mapURL} alt={this.props.name} title={this.props.name} />
+            </div>
+            </>
         }
 
 
-        {/* <div id='mapURL'>
-        <img src={mapURL} alt='City Map' title='map on error or blank' />
-        </div> : */}
-        <div id='mapURL'>
-          <img src={mapURL} alt={this.props.name} title={this.props.name} />
-        </div>
-        
+       
+
+  
+
         {
-        // <p>Three day forcast</p>
-          
-          this.state.weatherData.length &&
+          // <p>Three day forcast</p>
+
+          this.state.weatherData.length ?
           this.state.weatherData.map(forcast => (
             <>
-            <p>{forcast.date} will be {forcast.description}</p>
+              <p>{forcast.date} will be {forcast.description}</p>
             </>
           ))
+          : <></>
+        }
+        
+        {
+          this.state.movieData.length ?
+          this.state.movieData.map(movieInfo => (
+            <>
+            <p>{movieInfo.title} {movieInfo.releaseDate}</p>
+            <p>{movieInfo.overview}</p>
+            <img src={movieInfo.url} alt={movieInfo.title} title={movieInfo.title}/>
+            </>
+          ))
+          : <></>
         }
 
 
