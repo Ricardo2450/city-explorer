@@ -4,6 +4,9 @@ import Table from 'react-bootstrap/Table';
 // import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
 // import Button from 'react-bootstrap/Button';
+import DisplayMovies from './DisplayMovies';
+import Weather from './Weather';
+
 
 
 class App extends React.Component {
@@ -214,12 +217,9 @@ class App extends React.Component {
             </>
         }
 
+        <Weather/>
 
-       
-
-  
-
-        {
+        {/* {
           // <p>Three day forcast</p>
 
           this.state.weatherData.length ?
@@ -229,9 +229,10 @@ class App extends React.Component {
             </>
           ))
           : <></>
-        }
-        
-        {
+        } */}
+        <DisplayMovies/>
+
+        {/* {
           this.state.movieData.length ?
           this.state.movieData.map(movieInfo => (
             <>
@@ -241,7 +242,7 @@ class App extends React.Component {
             </>
           ))
           : <></>
-        }
+        } */}
 
 
 
@@ -259,67 +260,3 @@ class App extends React.Component {
 
 export default App;
 
-
-
-
-
-
-
-
-
-
-
-
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       city: '',
-//       starWarsData: []
-//     }
-//   }
-
-// handleSubmit = async (e) => {
-//   e.preventDefault();
-// // get the data from the API
-
-
-// // 1.async
-// // 2. await
-// // 3. .data
-
-
-//  let swData = await axios.get('https.........');
-
-// //  save that data somewhere??? - save it in State
-// console.log(swData.data.results);
-// this.setState({
-// starWarsData: swData.data.results
-// })
-// }
-
-
-// render () {
-
-//   let swCharacters = this.state.starWarsData.map((character, idx) => {
-//     return <li key={idx}>{character.name}</li>
-//   });
-
-
-
-
-//   return (
-//     <>
-//       <h1>City Explorer</h1>
-//       <form onSubmit={this.handleSubmit}>
-//         <label>Search for a City
-//           <input type='text' name='city' />
-//         </label>
-//         <button type='submit'>Search for a City</button>
-//       </form>
-//       <ul>
-//         {swCharacters}
-//       </ul>
-//     </>
-//   )
-// }

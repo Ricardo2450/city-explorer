@@ -41,6 +41,6 @@
   border: black;
 } */
 
-body {
+.root {
   background-color: blue;
 }
