@@ -4,6 +4,9 @@ import Table from 'react-bootstrap/Table';
 // import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
 // import Button from 'react-bootstrap/Button';
+import DisplayMovies from './DisplayMovies';
+import Weather from './Weather';
+
 
 
 class App extends React.Component {
@@ -153,21 +156,7 @@ class App extends React.Component {
     });
   };
 
-  // handleAlert = () => {
-  // const [show, setShow] = useState(true);
 
-  //   if (show) {
-  //     return (
-  //       <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-  //         <Alert.Heading>You got an error!</Alert.Heading>
-  //         <p>
-  //         {this.state.errorMessage}
-  //         </p>
-  //       </Alert>
-  //     );
-  //   }
-  //   return <Button onClick={() => setShow(true)}>Show Alert</Button>;
-  // }
 
 
   render() {
@@ -214,24 +203,34 @@ class App extends React.Component {
             </>
         }
 
+        <Weather/>
+        <div className='weatherDiv'>
+          {this.state.weatherData && <Weather forecast={this.state.weatherData} />}
+        </div>
 
-       
+        <DisplayMovies/>
 
-  
-
-        {
+        <div className='movieDiv'>
+          {this.state.movieData && <DisplayMovies/>} 
+        </div>
+        
+        
+        
+        {/* {
           // <p>Three day forcast</p>
 
           this.state.weatherData.length ?
           this.state.weatherData.map(forcast => (
             <>
-              <p>{forcast.date} will be {forcast.description}</p>
+            <p>{forcast.date} will be {forcast.description}</p>
             </>
-          ))
-          : <></>
-        }
+            ))
+            : <></>
+          } */}
         
-        {
+        
+        
+        {/* {
           this.state.movieData.length ?
           this.state.movieData.map(movieInfo => (
             <>
@@ -241,13 +240,7 @@ class App extends React.Component {
             </>
           ))
           : <></>
-        }
-
-
-
-        {/* 
-        {this.state.mapURL ? <img src={mapURL} alt='City Map' fluid /> : <p className='alert'></p>}
-        <img src={mapURL} alt='City Map' fluid /> */}
+        } */}
 
       </>
     )
@@ -259,67 +252,3 @@ class App extends React.Component {
 
 export default App;
 
-
-
-
-
-
-
-
-
-
-
-
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       city: '',
-//       starWarsData: []
-//     }
-//   }
-
-// handleSubmit = async (e) => {
-//   e.preventDefault();
-// // get the data from the API
-
-
-// // 1.async
-// // 2. await
-// // 3. .data
-
-
-//  let swData = await axios.get('https.........');
-
-// //  save that data somewhere??? - save it in State
-// console.log(swData.data.results);
-// this.setState({
-// starWarsData: swData.data.results
-// })
-// }
-
-
-// render () {
-
-//   let swCharacters = this.state.starWarsData.map((character, idx) => {
-//     return <li key={idx}>{character.name}</li>
-//   });
-
-
-
-
-//   return (
-//     <>
-//       <h1>City Explorer</h1>
-//       <form onSubmit={this.handleSubmit}>
-//         <label>Search for a City
-//           <input type='text' name='city' />
-//         </label>
-//         <button type='submit'>Search for a City</button>
-//       </form>
-//       <ul>
-//         {swCharacters}
-//       </ul>
-//     </>
-//   )
-// }

@@ -40,6 +40,8 @@ React, React-bootstrap, JavaScript, CSS
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
+Partners:
+* Ian
 
 Name of feature: Day 1- Asynchronous code, and APIs
 
