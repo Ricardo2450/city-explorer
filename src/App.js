@@ -4,8 +4,8 @@ import Table from 'react-bootstrap/Table';
 // import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
 // import Button from 'react-bootstrap/Button';
-import DisplayMovies from './DisplayMovies';
-import Weather from './Weather';
+import DisplayMovies from './DisplayMovies.js';
+import Weather from './Weather.js';
 
 
 
@@ -24,36 +24,6 @@ class App extends React.Component {
       movieData: [],
     }
   }
-
-  // handleSubmit = async (e) => {
-  //   try{
-  //   e.preventDefault();
-  // get the data from the API
-
-
-  // 1. async
-  // 2. await
-  // 3. .data
-
-
-  //  let swData = await axios.get('https.........');
-
-  // //  save that data somewhere??? - save it in State
-  // console.log(swData.data.results);
-  // this.setState({
-  // starWarsData: swData.data.results,
-  // isError: false
-  // });
-  //   } catch (error) {
-  //     console.log('error: ', error);
-  //     console.log('error.message: ', error.message);
-  //     this.setState({
-  //       errorMessage : error.message,
-  //       isError: true
-  //     })
-  //   }
-  // }
-
 
 
   handleCitySubmit = async (e) => {
@@ -203,15 +173,15 @@ class App extends React.Component {
             </>
         }
 
-        <Weather/>
+        {/* <Weather/> */}
         <div className='weatherDiv'>
           {this.state.weatherData && <Weather forecast={this.state.weatherData} />}
         </div>
 
-        <DisplayMovies/>
+        {/* <DisplayMovies/> */}
 
         <div className='movieDiv'>
-          {this.state.movieData && <DisplayMovies/>} 
+          {this.state.movieData && <DisplayMovies topFiveMovies={this.state.movieData}/>} 
         </div>
         
         

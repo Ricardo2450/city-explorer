@@ -6,7 +6,7 @@ class WeatherDay extends React.Component {
       <div key={this.props.idx}>
         <p>Date: {this.props.dailyForecast.date}</p>
         <p>
-          Low of {this.props.dailyForecast.low}°C, high of {this.props.dailyForecast.high} with {this.props.dailyForecast.description}
+        {this.props.description}
         </p>
       </div>
     //   <>
@@ -16,9 +16,5 @@ class WeatherDay extends React.Component {
     )
   }
 }
-
-
-
-
 
 export default WeatherDay
