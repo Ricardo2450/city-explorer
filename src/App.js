@@ -156,21 +156,7 @@ class App extends React.Component {
     });
   };
 
-  // handleAlert = () => {
-  // const [show, setShow] = useState(true);
 
-  //   if (show) {
-  //     return (
-  //       <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-  //         <Alert.Heading>You got an error!</Alert.Heading>
-  //         <p>
-  //         {this.state.errorMessage}
-  //         </p>
-  //       </Alert>
-  //     );
-  //   }
-  //   return <Button onClick={() => setShow(true)}>Show Alert</Button>;
-  // }
 
 
   render() {
@@ -218,20 +204,32 @@ class App extends React.Component {
         }
 
         <Weather/>
+        <div className='weatherDiv'>
+          {this.state.weatherData && <Weather forecast={this.state.weatherData} />}
+        </div>
 
+        <DisplayMovies/>
+
+        <div className='movieDiv'>
+          {this.state.movieData && <DisplayMovies/>} 
+        </div>
+        
+        
+        
         {/* {
           // <p>Three day forcast</p>
 
           this.state.weatherData.length ?
           this.state.weatherData.map(forcast => (
             <>
-              <p>{forcast.date} will be {forcast.description}</p>
+            <p>{forcast.date} will be {forcast.description}</p>
             </>
-          ))
-          : <></>
-        } */}
-        <DisplayMovies/>
-
+            ))
+            : <></>
+          } */}
+        
+        
+        
         {/* {
           this.state.movieData.length ?
           this.state.movieData.map(movieInfo => (
@@ -243,12 +241,6 @@ class App extends React.Component {
           ))
           : <></>
         } */}
-
-
-
-        {/* 
-        {this.state.mapURL ? <img src={mapURL} alt='City Map' fluid /> : <p className='alert'></p>}
-        <img src={mapURL} alt='City Map' fluid /> */}
 
       </>
     )
