@@ -100,10 +100,10 @@ class App extends React.Component {
     // console.log(lat);
     // console.log(lon);
     try {
-      console.log(`${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`);
+      // console.log(`${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`);
       let weatherUrl = await axios.get(`${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}`);
       // `${process.env.REACT_APP_SERVER}/`
-      console.log(weatherUrl);
+      // console.log(weatherUrl);
 
       this.setState({
         weatherData: weatherUrl.data,
@@ -126,10 +126,10 @@ class App extends React.Component {
     // e.preventDefault();
     // console.log(searchedCity);
     try {
-      console.log(`${process.env.REACT_APP_SERVER}/movie?name=${this.state.city}`);
-      let movieUrl = await axios.get(`${process.env.REACT_APP_SERVER}/movie?name=${this.state.city}`);
+      // console.log(`${process.env.REACT_APP_SERVER}/movie?name=${this.state.city}`);
+      let movieUrl = await axios.get(`${process.env.REACT_APP_SERVER}/movies?name=${this.state.city}`);
       // `${process.env.REACT_APP_SERVER}/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchedCity}`
-      console.log(movieUrl.data);      
+      console.log(movieUrl);      
 
       this.setState({
         movieData: movieUrl.data,
@@ -203,15 +203,15 @@ class App extends React.Component {
             </>
         }
 
-        <Weather/>
+        {/* <Weather/> */}
         <div className='weatherDiv'>
           {this.state.weatherData && <Weather forecast={this.state.weatherData} />}
         </div>
 
-        <DisplayMovies/>
+        {/* <DisplayMovies/> */}
 
         <div className='movieDiv'>
-          {this.state.movieData && <DisplayMovies/>} 
+          {this.state.movieData && <DisplayMovies movies={this.state.movieData}/>} 
         </div>
         
         
