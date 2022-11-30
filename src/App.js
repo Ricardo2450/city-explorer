@@ -96,7 +96,7 @@ class App extends React.Component {
     // e.preventDefault();
     // console.log(searchedCity);
     try {
-      console.log(`${process.env.REACT_APP_SERVER}/movie?name=${this.state.city}`);
+      // console.log(`${process.env.REACT_APP_SERVER}/movie?name=${this.state.city}`);
       let movieUrl = await axios.get(`${process.env.REACT_APP_SERVER}/movie?name=${this.state.city}`);
       // `${process.env.REACT_APP_SERVER}/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchedCity}`
       console.log(movieUrl.data);      
