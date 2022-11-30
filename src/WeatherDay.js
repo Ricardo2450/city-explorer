@@ -6,7 +6,7 @@ class WeatherDay extends React.Component {
       <div key={this.props.idx}>
         <p>Date: {this.props.dailyForecast.date}</p>
         <p>
-        {this.props.description}
+        {this.props.dailyForecast.description}
         </p>
       </div>
     //   <>
