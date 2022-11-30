@@ -5,16 +5,14 @@ class DisplayMovies extends React.Component {
   render() {
     return (
       <>
-      {this.props.topTenMovies.length < 1 ? <p></p> :
+        {this.props.topFiveMovies.length < 1 ? <p></p> :
           <div className='topFiveMovies'>
             {this.props.topFiveMovies.map((movie, idx) => (
               <Movie movieInfo={movie} idx={idx} key={idx} />
             ))}
           </div>
-        }</>
-      // <Movie
-      //   movies={this.props.movies}
-      //   />
+        }
+      </>
     )
   }
 }
